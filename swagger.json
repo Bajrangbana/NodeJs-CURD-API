@@ -1,0 +1,211 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "NodeJs CRUD API",
+        "description": "My NodeJs CRUD API",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Users",
+            "description": "API for users in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/user/getUsers": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get all users in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/addUser": {
+            "post": {
+              "tags": ["Users"],
+              "description": "Create new user in system",
+              "parameters": [
+                {
+                  "name": "user",
+                  "in": "body",
+                  "description": "User that we want to create",
+                  "schema": {
+                    "$ref": "#/definitions/addUser"
+                  }
+                }
+              ],
+              "produces": ["application/json"],
+              "responses": {
+                "200": {
+                  "description": "New user is created",
+                  "schema": {
+                    "properties": {
+                        "isSucces": {
+                        "type": "boolean"
+                    },
+                    "message":{
+                        "type": "string"
+                    }
+                }
+                  }
+                }
+              }
+            }
+          },
+          "/user/updateUser": {
+            "post": {
+              "tags": ["Users"],
+              "description": "Update name of user in system",
+              "parameters": [
+                {
+                  "name": "user",
+                  "in": "body",
+                  "description": "Update name of user in system",
+                  "schema": {
+                    "properties":{
+                        "id":{
+                            "type": "string"
+                        },
+                        "name":{
+                            "type": "string"
+                        }
+                    }
+                  }
+                }
+              ],
+              "produces": ["application/json"],
+              "responses": {
+                "200": {
+                  "description": "User updated in system",
+                  "schema": {
+                    "properties": {
+                        "isSucces": {
+                        "type": "boolean"
+                    },
+                    "message":{
+                        "type": "string"
+                    }
+                }
+                  }
+                }
+              }
+            }
+          },
+          "/user/deleteUser": {
+            "delete": {
+              "tags": ["Users"],
+              "description": "Delete user in system",
+              "parameters": [
+                {
+                  "name": "user",
+                  "in": "body",
+                  "description": "Delete user in system",
+                  "schema": {
+                    "properties":{
+                        "id":{
+                            "type": "string"
+                        }
+                    }
+                  }
+                }
+              ],
+              "produces": ["application/json"],
+              "responses": {
+                "200": {
+                  "description": "User deleted from system",
+                  "schema": {
+                    "properties": {
+                        "isSucces": {
+                        "type": "boolean"
+                    },
+                    "message":{
+                        "type": "string"
+                    }
+                }
+                  }
+                }
+              }
+            }
+          }
+    },
+    "definitions": {
+        "Users": {
+            "required": [
+                "isSuccess",
+                "result"
+            ],
+            "properties": {
+                "isSuccess": {
+                    "type": "boolean"
+                },
+                "result": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "_id": {
+                                "type": "string"
+                              },
+                            "name": {
+                              "type": "string"
+                            },
+                            "Age":{
+                                "type": "number"
+                            },
+                            "loginName":{
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string"
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        },
+        "addUser": {
+            "required": ["name"],
+            "properties":{
+                "name":{
+                    "type": "string"
+                },
+                "Age":{
+                    "type": "number"
+                },
+                "Gender":{
+                    "type": "string"
+                },
+                "loginName":{
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
